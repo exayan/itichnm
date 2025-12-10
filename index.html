@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <title>ITI Anantnag - CHNM Trade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+.speak-btn {
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+
+.speak-btn:hover {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  transform: translateY(-1px);
+}
+
   <style>
     :root {
       --bg: #050816;
@@ -1361,32 +1382,74 @@
   </main>
 
   <footer>
-    Made with ❤️ by the AYAN <span>CHNM Trade</span> at ITI Anantnag – where PCs get repaired and
+    Made with ❤️ by the <span>CHNM Trade</span> at ITI Anantnag – where PCs get repaired and
     friendships get upgraded.
   </footer>
 
   <script>
-    // Simple filter for students: all / boys / girls
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const studentCards = document.querySelectorAll(".student-card");
+  // Simple filter for students: all / boys / girls
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const studentCards = document.querySelectorAll(".student-card");
 
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter;
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
 
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-        studentCards.forEach((card) => {
-          const gender = card.dataset.gender;
-          if (filter === "all" || filter === gender) {
-            card.style.display = "";
-          } else {
-            card.style.display = "none";
-          }
-        });
+      studentCards.forEach((card) => {
+        const gender = card.dataset.gender;
+        if (filter === "all" || filter === gender) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
       });
     });
-  </script>
-</body>
-</html>
+  });
+
+  // 🔊 Text-to-Speech for each student card
+  function speakStudentCard(card) {
+    if (!("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported in this browser.");
+      return;
+    }
+
+    const name = card.querySelector(".student-name")?.innerText || "";
+    const role = card.querySelector(".student-role")?.innerText || "";
+    const qualities = card.querySelector(".student-qualities")?.innerText || "";
+    const fun = card.querySelector(".student-fun")?.innerText || "";
+
+    // Clean up the text a little
+    const text = [
+      name,
+      role.replace("Role:", "Role is"),
+      qualities.replace("Qualities:", "Qualities:"),
+      fun.replace("Funny:", "Funny fact:")
+    ]
+      .filter(Boolean)
+      .join(". ");
+
+    // Stop any current speech and speak this one
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1;   // speed
+    utterance.pitch = 1;  // voice pitch
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // Add a speaker button to each student card automatically
+  studentCards.forEach((card) => {
+    const metaRow = card.querySelector(".student-meta-row") || card;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "speak-btn";
+    btn.innerHTML = "🔊 Listen";
+
+    btn.addEventListener("click", () => speakStudentCard(card));
+
+    // Put the button nicely in the meta row
+    metaRow.appendChild(btn);
+  });
+</script>
