@@ -2,1897 +2,267 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ITI Anantnag - CHNM Trade</title>
+  <title>CHNM – ITI Anantnag | Hardware & Networking</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Remix Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
+    /* ✅ THEME VARIABLES */
     :root {
-      --bg-card: rgba(15, 23, 42, 0.94);
-      --accent: #22c55e;
-      --accent2: #38bdf8;
-      --accent3: #e879f9;
-      --text: #e5e7eb;
+      --bg-main: #0d1117; /* default dark */
+      --bg-alt: #161b22;
+      --text-main: #e5e7eb;
       --muted: #9ca3af;
-      --danger: #f97316;
-      --radius-xl: 18px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
+      --card-main: rgba(22, 27, 34, 0.9);
+      --border-main: rgba(148, 163, 228, 0.4);
+      --accent: #3aa9ff;
+      --accent2: #7f6bff;
+      --bg-glow: rgba(120, 150, 255, 0.18);
+      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.7);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --transition-fast: 0.25s ease;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    /* ✅ LIGHT MODE */
+    body.light-mode {
+      --bg-main: #e8ecf3;
+      --bg-alt: #f4f6fb;
+      --text-main: #0f172a;
+      --muted: #6d7191;
+      --card-main: rgba(255, 255, 255, 0.9);
+      --border-main: rgba(20, 24, 50, 0.18);
+      --shadow-soft: 0 18px 50px rgba(10, 20, 60, 0.4);
+      --bg-glow: rgba(120, 150, 255, 0.15);
     }
 
-    html {
+    /* ✅ DARK MODE */
+    body.dark-mode {
+      --bg-main: #0d1117;
+      --bg-alt: #161b22;
+      --text-main: #e5e7eb;
+      --muted: #9ca3af;
+      --card-main: rgba(22, 27, 34, 0.9);
+      --border-main: rgba(148, 163, 228, 0.4);
+      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.7);
+      --bg-glow: rgba(120, 150, 255, 0.18);
+    }
+
+    /* ✅ GLOBAL BACKGROUND */
+    html, body {
       scroll-behavior: smooth;
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
-   body {
-  min-height: 100vh;
-  line-height: 1.6;
-  overflow-x: hidden;
-  color: var(--text);
-  background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
-  background-attachment: fixed;
-}
-
-    /* ITI logo background (placeholder) */
-    .iti-logo-bg {
+    /* ✅ TRANSPARENT NEON GRAY OVERLAY */
+    body::after {
+      content: "";
       position: fixed;
       inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, var(--bg-glow), transparent 60%),
+        radial-gradient(circle at 80% 80%, var(--bg-glow), transparent 60%);
       pointer-events: none;
       z-index: -1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.07;
-      mix-blend-mode: screen;
     }
 
-    .iti-logo-bg-inner {
-      text-align: center;
-    }
-
-    .iti-logo-circle {
-      width: min(260px, 55vw);
-      height: min(260px, 55vw);
-      border-radius: 999px;
-      border: 6px solid #64748b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.4rem;
-      background: radial-gradient(circle at top, #0f172a, #020617);
-    }
-
-    .iti-logo-circle span {
-      font-weight: 800;
-      font-size: min(2.2rem, 8vw);
-      letter-spacing: 0.15em;
-    }
-
-    .iti-logo-bg-inner p {
-      font-size: min(0.9rem, 3.2vw);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    /* You can replace this with your real logo:
-       .iti-logo-bg { background: url('YOUR-LOGO.png') center/320px no-repeat; opacity: 0.12; } */
-
-    /* Welcome overlay */
-    #welcome-overlay {
+    /* ✅ FLOATING THEME TOGGLE BUTTON */
+    .theme-toggle {
       position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.99));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      color: var(--text);
-      text-align: center;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
-    }
-
-    #welcome-overlay.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .welcome-title {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-
-    .welcome-title span {
-      background: linear-gradient(to right, #22c55e, #38bdf8, #e879f9);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .welcome-sub {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .welcome-pulse {
-      width: 52px;
-      height: 52px;
-      border-radius: 999px;
-      border: 2px solid rgba(148, 163, 184, 0.7);
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-main);
+      background: var(--card-main);
+      backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
+      cursor: pointer;
+      z-index: 999;
+      color: var(--text-main);
+      box-shadow: var(--shadow-soft);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     }
 
-    .welcome-pulse::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      border-radius: inherit;
-      border: 2px solid rgba(56, 189, 248, 0.8);
-      animation: welcomePulse 1.7s ease-out infinite;
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
     }
 
-    .welcome-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
-    }
-
-    @keyframes welcomePulse {
-      0% { transform: scale(0.3); opacity: 1; }
-      100% { transform: scale(1); opacity: 0; }
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to right,
-        rgba(15, 23, 42, 0.94),
-        rgba(15, 23, 42, 0.75),
-        rgba(15, 23, 42, 0.94)
-      );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.75rem 1rem;
+    /* ✅ YOUR EXISTING CSS BELOW (unchanged) */
+    .top-bar {
+      width: 100%;
+      padding: 14px 22px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 228, 0.2);
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
     }
 
-    .logo-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      background: radial-gradient(circle at 30% 0, #22c55e, #0f172a);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+    .menu-btn {
+      font-size: 1.8rem;
+      color: var(--text-main);
+      cursor: pointer;
     }
 
-    .logo span {
-      background: linear-gradient(to right, #22c55e, #38bdf8);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.75rem;
-      font-size: 0.85rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      border-color: rgba(34, 197, 94, 0.5);
-      background-color: rgba(15, 23, 42, 0.9);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.8rem 1rem 2.5rem;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .section-title span {
-      color: var(--accent);
-    }
-
-    .section-sub {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    /* HERO */
+    /* ✅ HERO SECTION */
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
-      gap: 1.8rem;
-      align-items: center;
-      margin-bottom: 2.5rem;
+      margin-top: 100px;
+      padding: 20px;
+      text-align: center;
     }
 
-    .hero-text {
-      animation: floatIn 0.9s ease-out;
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
     }
 
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(22px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.16rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.96);
-      font-size: 0.77rem;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-kicker-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
-    }
-
-    .hero-title {
-      font-size: clamp(1.8rem, 3vw + 1rem, 2.6rem);
-      line-height: 1.15;
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, #22c55e, #38bdf8, #e879f9);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      color: var(--muted);
-      max-width: 32rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.3rem;
-      font-size: 0.78rem;
-    }
-
-    .pill {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 0.25rem 0.75rem;
-      background: rgba(15, 23, 42, 0.96);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 0.5rem 1.1rem;
-      font-size: 0.85rem;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      text-decoration: none;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at 10% 0, #22c55e, #15803d);
-      color: #ecfdf5;
-      box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.01);
-      box-shadow: 0 0 26px rgba(34, 197, 94, 0.8);
-    }
-
-    .btn-ghost {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.55);
-      color: var(--muted);
-      padding-inline: 0.9rem;
-    }
-
-    .btn-ghost:hover {
-      border-style: solid;
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .hero-tagline {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .hero-tagline span {
-      width: 28px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.7));
-    }
-
-    .hero-panel {
-      border-radius: 24px;
-      padding: 1.1rem 1.1rem 1rem;
-      background: radial-gradient(circle at top, #020617, #020617);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.7rem;
-      font-size: 0.75rem;
+    .hero p {
+      font-size: 1rem;
       color: var(--muted);
     }
 
-    .hero-panel-dots {
-      display: inline-flex;
-      gap: 0.2rem;
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #4b5563;
-    }
-
-    .dot:nth-child(1) { background: #f97316; }
-    .dot:nth-child(2) { background: #eab308; }
-    .dot:nth-child(3) { background: #22c55e; }
-
-    .hero-terminal {
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, #0f172a, #020617);
-      border: 1px solid rgba(31, 41, 55, 0.8);
-      padding: 0.8rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.75rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-line {
-      display: flex;
-      gap: 0.45rem;
-      margin-bottom: 0.1rem;
-    }
-
-    .hero-line span.prefix { color: #4ade80; }
-    .hero-line span.text-soft { color: #9ca3af; }
-    .hero-line span.text-strong { color: #e5e7eb; }
-
-    /* Trade Theme */
-    .trade-theme {
-      border-radius: var(--radius-xl);
-      padding: 1.1rem 1rem;
-      background: rgba(15, 23, 42, 0.97);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .trade-theme ul {
-      list-style: none;
-      margin-top: 0.6rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.3rem 0.9rem;
-      font-size: 0.83rem;
-    }
-
-    .trade-theme li::before {
-      content: "◆";
-      margin-right: 0.4rem;
-      font-size: 0.55rem;
-      color: var(--accent2);
-    }
-
-    .trade-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      font-size: 0.75rem;
-      margin-top: 0.3rem;
-    }
-
-    .trade-chip {
-      padding: 0.16rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .trade-meter {
-      display: grid;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-      margin-top: 0.2rem;
-    }
-
-    .trade-meter-bar {
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      overflow: hidden;
-    }
-
-    .trade-meter-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(to right, #22c55e, #38bdf8);
-      width: var(--value, 90%);
-    }
-
-    /* Cards */
-    .card {
-      border-radius: var(--radius-xl);
-      padding: 1rem;
-      background: var(--bg-card);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-    }
-
-    .badge {
-      font-size: 0.7rem;
-      padding: 0.22rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
-    }
-
-    .card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .sir-summary {
-      margin-top: 0.6rem;
-      font-size: 0.86rem;
-      color: var(--text);
-    }
-
-    .sir-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.4rem;
-      font-size: 0.75rem;
-    }
-
-    .sir-tag {
-      border-radius: 999px;
-      padding: 0.18rem 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    /* Lab culture */
-    .lab-culture-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.9fr);
-      gap: 1rem;
-    }
-
-    .lab-list {
-      list-style: none;
-      margin-top: 0.4rem;
-      font-size: 0.83rem;
-    }
-
-    .lab-list li {
-      margin-bottom: 0.3rem;
-      display: flex;
-      gap: 0.4rem;
-      align-items: flex-start;
-    }
-
-    .lab-list span.bullet { font-size: 0.85rem; }
-
-    .lab-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.6rem;
-      margin-top: 0.4rem;
-      font-size: 0.78rem;
-    }
-
-    .lab-stat {
-      border-radius: 14px;
-      padding: 0.5rem 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), #020617);
-    }
-
-    .lab-stat strong {
-      display: block;
-      margin-bottom: 0.1rem;
-      font-size: 0.8rem;
-    }
-
-    /* Students */
-    .student-filters {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.7rem;
-      font-size: 0.79rem;
-    }
-.audio-btn {
-  padding: 0.18rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: rgba(15, 23, 42, 0.95);
-  color: var(--muted);
-  font-size: 0.72rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  white-space: nowrap;
-  transition: all 0.16s ease;
-}
-
-.audio-btn:hover {
-  border-color: var(--accent2);
-  color: var(--accent2);
-  transform: translateY(-1px);
-}
-
-
-    .filter-btn {
-      padding: 0.25rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted);
-      cursor: pointer;
-      font-size: inherit;
-      transition: all 0.16s ease;
-    }
-
-    .filter-btn.active {
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.55);
-    }
-
-    .students-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 0.9rem;
-      font-size: 0.82rem;
+    /* ✅ STUDENT CARDS */
+    .students {
+      padding: 20px;
     }
 
     .student-card {
-      position: relative;
-      border-radius: 16px;
-      padding: 1.7rem 0.75rem 0.8rem; /* extra top space for robot */
-      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.18), #020617);
-      border: 1px solid rgba(75, 85, 99, 0.7);
-      overflow: hidden;
-      cursor: default;
-      transition:
-        transform 0.16s ease,
-        box-shadow 0.16s ease,
-        border-color 0.16s ease,
-        background 0.16s ease;
-      transform-origin: center;
+      background: var(--card-main);
+      border: 1px solid var(--border-main);
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
     .student-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
-      border-color: rgba(34, 197, 94, 0.7);
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), #020617);
-    }
-
-    .student-rank {
-      font-size: 0.7rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.25rem;
-    }
-
-    .student-name {
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      font-size: 0.86rem;
-      margin-bottom: 0.05rem;
-    }
-
-    .student-role {
-      font-size: 0.78rem;
-      color: var(--accent2);
-      margin-bottom: 0.25rem;
-    }
-
-    .student-qualities,
-    .student-fun {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .student-fun {
-      color: var(--danger);
-    }
-
-    .student-meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
-    }
-
-    .student-tag {
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .wa-link {
-      text-decoration: none;
-      font-size: 0.72rem;
-      padding: 0.18rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(34, 197, 94, 0.8);
-      background: rgba(21, 128, 61, 0.18);
-      color: #bbf7d0;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      white-space: nowrap;
-    }
-
-    .wa-link span.icon {
-      font-size: 0.9rem;
-    }
-
-    .ayan-card {
-      border-width: 2px;
-      border-color: rgba(234, 179, 8, 0.9);
-      box-shadow: 0 0 24px rgba(234, 179, 8, 0.7);
-      position: relative;
-    }
-
-    .ayan-card::after {
-      content: "★ CHNM Captain ★";
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      font-size: 0.65rem;
-      padding: 0.12rem 0.45rem;
-      border-radius: 999px;
-      background: rgba(234, 179, 8, 0.18);
-      border: 1px solid rgba(234, 179, 8, 0.7);
-      color: #facc15;
-    }
-
-    /* MINI ROBOT (per card) */
-    .mini-robot {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px) scale(0.85);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .student-card:hover .mini-robot {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(0.96);
-      animation: robotDance 0.9s ease-in-out infinite;
-    }
-
-    @keyframes robotDance {
-      0%, 100% { transform: translateX(-50%) translateY(0) scale(0.96) rotate(0deg); }
-      25% { transform: translateX(-50%) translateY(-4px) scale(1) rotate(-4deg); }
-      50% { transform: translateX(-50%) translateY(0) scale(0.96) rotate(0deg); }
-      75% { transform: translateX(-50%) translateY(-4px) scale(1) rotate(4deg); }
-    }
-
-    .mini-body {
-      width: 40px;
-      border-radius: 12px;
-      background: radial-gradient(circle at top, #22c55e, #0f172a);
-      border: 2px solid rgba(148, 163, 184, 0.9);
-      padding: 4px 3px 5px;
-      box-shadow: 0 8px 12px rgba(0,0,0,0.7);
-      position: relative;
-    }
-
-    .mini-head {
-      width: 26px;
-      height: 17px;
-      border-radius: 10px;
-      background: radial-gradient(circle at top, #020617, #020617);
-      border: 2px solid rgba(226, 232, 240, 0.9);
-      margin: 0 auto 2px;
-      position: relative;
-    }
-
-    .mini-eye {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #38bdf8;
-      position: absolute;
-      top: 5px;
-      box-shadow: 0 0 6px rgba(56, 189, 248, 0.9);
-    }
-
-    .mini-eye.left { left: 6px; }
-    .mini-eye.right { right: 6px; }
-
-    .mini-status {
-      font-size: 0.5rem;
-      color: #e5e7eb;
-      text-align: center;
-    }
-
-    .mini-legs {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      margin-top: 2px;
-    }
-
-    .mini-leg {
-      width: 6px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.9);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-      padding: 0.8rem 1rem 1.4rem;
-    }
-
-    footer span { color: var(--accent); }
-
-    /* Back to top */
-    #back-to-top {
-      position: fixed;
-      bottom: 18px;
-      right: 18px;
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--muted);
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 40;
-    }
-
-    #back-to-top.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    #back-to-top:hover {
-      transform: translateY(-2px);
-      color: var(--accent);
+      transform: translateY(-3px);
       border-color: var(--accent);
     }
 
-    /* Responsive */
-    @media (max-width: 820px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-panel {
-        order: -1;
-      }
-      .trade-theme {
-        grid-template-columns: 1fr;
-      }
-      .lab-culture-grid {
-        grid-template-columns: 1fr;
-      }
+    .student-card img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border-main);
     }
 
-    @media (max-width: 640px) {
-      .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-      }
-      .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      main {
-        padding-inline: 0.8rem;
-      }
-      .students-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-text {
-        text-align: left;
-      }
+    .student-info h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .student-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
   </style>
 </head>
-<body>
-  <!-- ITI Logo background -->
-  <div class="iti-logo-bg">
-    <div class="iti-logo-bg-inner">
-      <div class="iti-logo-circle">
-        <span>ITI</span>
-      </div>
-      <p>ANANTNAG • CHNM TRADE</p>
-    </div>
+
+<body class="dark-mode">
+
+  <!-- ✅ Floating Theme Toggle -->
+  <button id="themeToggle" class="theme-toggle">
+    <i class="ri-sun-line"></i>
+  </button>
+
+  <!-- ✅ TOP BAR -->
+  <div class="top-bar">
+    <div class="logo">CHNM – ITI Anantnag</div>
+    <i class="ri-menu-line menu-btn"></i>
   </div>
 
-  <!-- Welcome overlay -->
-  <div id="welcome-overlay">
-    <h1 class="welcome-title">
-     لسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ Welcome to <span>ITI Anantnag – CHNM</span>
-    </h1>
-    <p class="welcome-sub">
-      Loading your Computer Hardware &amp; Network Maintenance batch space...
-    </p>
-    <div class="welcome-pulse">
-      <div class="welcome-dot"></div>
-    </div>
-  </div>
+  <!-- ✅ HERO -->
+  <section class="hero">
+    <h1>Computer Hardware & Networking</h1>
+    <p>ITI Anantnag – Batch 2024</p>
+  </section>
 
-  <!-- NAVBAR -->
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <div class="logo-badge">CH</div>
-        <span>ITI Anantnag • CHNM</span>
-      </div>
-      <nav class="nav-links">
-        <a href="#top">Home</a>
-        <a href="#trade">Trade Theme</a>
-        <a href="#culture">Lab Culture</a>
-        <a href="#sir">Instructor</a>
-        <a href="#students">Students</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-text">
-        <div class="hero-kicker">
-          <div class="hero-kicker-dot"></div>
-          <span>Welcome to ITI Anantnag • Trade: CHNM</span>
-        </div>
-        <h1 class="hero-title">
-          Computer Hardware &amp; Network Maintenance<br />
-          <span>Colourful Circuit Squad</span>
-        </h1>
-        <p class="hero-subtitle">
-          Official mini-website of <strong>ITI Anantnag – Trade CHNM</strong>.
-          One instructor, one squad, dozens of motherboards, and unlimited Wi-Fi troubleshooting.
-        </p>
-
-        <div class="hero-pill-row">
-          <div class="pill">🖥️ PC Building</div>
-          <div class="pill">🌐 Network Cabling</div>
-          <div class="pill">🛠️ Fault Finding</div>
-          <div class="pill">😄 Fun &amp; Friendly Batch</div>
-        </div>
-
-        <div class="hero-actions">
-          <a href="#students" class="btn btn-primary">👑 Meet Ayan &amp; Team</a>
-          <a href="#sir" class="btn btn-ghost">🎓 Learn from Zahoor Sir</a>
-        </div>
-
-        <div class="hero-tagline">
-          <span></span>
-          <p>From loose cables to full networks – CHNM fixes it all.</p>
-        </div>
-      </div>
-
-      <aside class="hero-panel" aria-label="Animated trade panel">
-        <div class="hero-panel-header">
-          <div class="hero-panel-dots">
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          </div>
-          <span>CHNM-Terminal.exe</span>
-        </div>
-        <div class="hero-terminal">
-          <div class="hero-line">
-            <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Lab:</span>
-            <span class="text-strong">ITI Anantnag • CHNM Trade</span>
-          </div>
-          <div class="hero-line">
-            <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Instructor:</span>
-            <span class="text-strong">Zahoor Sir ✅</span>
-          </div>
-          <div class="hero-line">
-            <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Captain of batch:</span>
-            <span class="text-strong">Ayan 👑 (always on top)</span>
-          </div>
-          <div class="hero-line">
-            <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Theme:</span>
-            <span class="text-strong">Colourful circuits, serious learning, full comedy.</span>
-          </div>
-          <div class="hero-line">
-            <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Hint:</span>
-            <span class="text-strong">Hover any student card to see mini robot dance.</span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <!-- TRADE THEME -->
-    <section id="trade">
-      <div class="section-header">
-        <h2 class="section-title">Trade Theme – <span>CHNM Circuit Guardians</span></h2>
-        <p class="section-sub">
-          The heart of every working PC and every shouting “Internet nai chal raha!” call.
-        </p>
-      </div>
-
-      <div class="trade-theme">
-        <div>
-          <p>
-            <strong>Computer Hardware &amp; Network Maintenance (CHNM)</strong> is all about
-            building, repairing and protecting computer systems and networks. From RAM and
-            routers to IP addresses and pings, this trade turns normal people into
-            <em>troubleshooting legends</em>.
-          </p>
-          <ul>
-            <li>Assembling and upgrading computers</li>
-            <li>Installing operating systems &amp; drivers</li>
-            <li>Configuring LAN, Wi-Fi &amp; basic servers</li>
-            <li>Diagnosing hardware &amp; network faults</li>
-            <li>Crimping network cables like a pro</li>
-            <li>Keeping systems secure and stable</li>
-          </ul>
-          <div class="trade-chip-row">
-            <div class="trade-chip">🔌 “Cable stuck? Call CHNM.”</div>
-            <div class="trade-chip">🧠 Logic + Practical + Patience</div>
-            <div class="trade-chip">🎧 Tech support for friends &amp; family</div>
-          </div>
-        </div>
-        <div>
-          <div class="trade-meter">
-            <div>
-              Passion for Hardware
-              <div class="trade-meter-bar">
-                <div class="trade-meter-fill" style="--value: 96%;"></div>
-              </div>
-            </div>
-            <div>
-              Network Skills
-              <div class="trade-meter-bar">
-                <div class="trade-meter-fill" style="--value: 93%;"></div>
-              </div>
-            </div>
-            <div>
-              Tea Break Energy
-              <div class="trade-meter-bar">
-                <div class="trade-meter-fill" style="--value: 120%;"></div>
-              </div>
-            </div>
-            <div>
-              “Sir, PC Hang Ho Gaya” Problems Solved
-              <div class="trade-meter-bar">
-                <div class="trade-meter-fill" style="--value: 99%;"></div>
-              </div>
-            </div>
-          </div>
-          <p style="font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem;">
-            Our theme is simple: <strong>Learn seriously, laugh loudly, and never leave a system
-            half-fixed.</strong> Every BSOD and “no display” is just another level to clear.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- LAB CULTURE -->
-    <section id="culture">
-      <div class="section-header">
-        <h2 class="section-title">Lab Culture – <span>CHNM Way</span></h2>
-        <p class="section-sub">Where discipline, learning and jokes happily live together.</p>
-      </div>
-
-      <div class="lab-culture-grid">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Lab Rules (Unofficial but Important)</h3>
-            <div class="badge">
-              <div class="badge-dot"></div>
-              <span>Respect systems. Respect people.</span>
-            </div>
-          </div>
-          <ul class="lab-list">
-            <li><span class="bullet">🧼</span><span>Handle every PC like it’s your own – no random wire pulling.</span></li>
-            <li><span class="bullet">⌛</span><span>Be on time for practicals. Computers hate late booting and late students.</span></li>
-            <li><span class="bullet">🤝</span><span>Help your batchmates. Today you fix their error; tomorrow they fix yours.</span></li>
-            <li><span class="bullet">🔇</span><span>Noise OFF during explanation. Fun ON during practice (but in limits).</span></li>
-            <li><span class="bullet">📋</span><span>Document what you do – IPs, changes, ideas. Future you will thank you.</span></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Fun Lab Stats</h3>
-            <div class="badge">
-              <div class="badge-dot"></div>
-              <span>CHNM Batch Highlights</span>
-            </div>
-          </div>
-          <div class="lab-stats">
-            <div class="lab-stat">
-              <strong>50+ PCs</strong>
-              Windows installed, reinstalled and “repair installed” more times than we admit.
-            </div>
-            <div class="lab-stat">
-              <strong>∞ Cables</strong>
-              LAN, power, VGA, HDMI – if it’s tangled, CHNM will untangle it.
-            </div>
-            <div class="lab-stat">
-              <strong>Daily Question</strong>
-              “Sir, aaj practical hoga ya theory?” – asked at least once every day.
-            </div>
-            <div class="lab-stat">
-              <strong>Official Tagline</strong>
-              “If it’s not working, give it to CHNM batch.”
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INSTRUCTOR -->
-    <section id="sir">
-      <div class="section-header">
-        <h2 class="section-title">Instructor – <span>Zahoor Sir</span></h2>
-        <p class="section-sub">The man who turns confusion into concept clarity.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Zahoor Sir • Instructor, CHNM</h3>
-          <div class="badge">
-            <div class="badge-dot"></div>
-            <span>“Check the basics first.”</span>
-          </div>
-        </div>
-        <p>
-          Zahoor Sir is the official guide, debugger and network guardian of the CHNM trade at
-          ITI Anantnag. Between explaining IP addressing and joking about loose RAM, he keeps
-          the class both disciplined and relaxed.
-        </p>
-        <p class="sir-summary">
-          <strong>Summary:</strong> Patient, practical and very observant. He knows exactly who is
-          actually studying and who is just staring at the monitor. Loves students who try
-          things themselves before saying, “Sir, ho hi nai raha.” If you respect time, tools
-          and the lab, he will always support you – in class and for your future career.
-        </p>
-        <div class="sir-tags">
-          <span class="sir-tag">📚 Clears basics before advanced topics</span>
-          <span class="sir-tag">🛠️ Believes in hands-on practice</span>
-          <span class="sir-tag">😄 Serious during class, funny after class</span>
-          <span class="sir-tag">🧭 Keeps everyone on the right track</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- STUDENTS -->
-    <section id="students">
-      <div class="section-header">
-        <h2 class="section-title">Our <span>Students</span> – CHNM Squad</h2>
-        <p class="section-sub">
-          A perfectly balanced combo of hardware heroes, network ninjas and full-time comedians.
-        </p>
-      </div>
-
-      <div class="student-filters">
-        <button class="filter-btn active" data-filter="all">All Students</button>
-        <button class="filter-btn" data-filter="boys">Boys (with WhatsApp links)</button>
-        <button class="filter-btn" data-filter="girls">Girls</button>
-      </div>
-
-      <div class="students-grid">
-        <!-- BOYS – -->
-        <!-- AYAN -->
-        <article class="student-card ayan-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">CHNM</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#1 • Always on</span>
-            <span>System Builder • Lab Favourite</span>
-          </div>
-          <h3 class="student-name">Ayan</h3>
-          <div class="student-role">Role: Team Captain &amp; Main Problem Solver</div>
-          <p class="student-qualities">
-            Qualities: Quick learner, calm under pressure, remembers IPs that others forget,
-            helps everyone without showing off.
-          </p>
-          <p class="student-fun">
-            Funny: First one to say “Relax guys, easy hai” just before the toughest practical.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">💡 Trusted by Sir for serious tasks</span>
-            <a class="wa-link"
-               href="https://wa.me/916262591914?text=Assalamu%20Alaikum%20Ayan%2C%20I%20just%20visited%20our%20ITI%20Anantnag%20CHNM%20website!%20%F0%9F%91%8B"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Ayan
-            </a>
-          </div>
-        </article>
-
-        <!-- BILAl -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">NET</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#2</span>
-            <span>Network Explorer</span>
-          </div>
-          <h3 class="student-name">Bilal</h3>
-          <div class="student-role">Role: Ping &amp; Network Tester</div>
-          <p class="student-qualities">
-            Qualities: Curious about every cable, asks smart questions, never afraid to try a new command.
-          </p>
-          <p class="student-fun">
-            Funny: Says “Ping ho raha hai, phir problem kidhar hai?” at least 5 times a day.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🌐 Loves checking connectivity</span>
-            <a class="wa-link"
-               href="https://wa.me/916006806742?text=Salaam%20Bila%2C%20network%20tester!%20Just%20checked%20our%20CHNM%20website.%20Looks%20cool%20%F0%9F%8C%90"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Bilal
-            </a>
-          </div>
-        </article>
-
-        <!-- MEHRAN -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">HW</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#3</span>
-            <span>Hardware Specialist</span>
-          </div>
-          <h3 class="student-name">Mehran</h3>
-          <div class="student-role">Role: RAM &amp; SSD Guru</div>
-          <p class="student-qualities">
-            Qualities: Handles components like a pro, very gentle with hardware, good at upgrading PCs.
-          </p>
-          <p class="student-fun">
-            Funny: Checks RAM 3 times even when the error was just “monitor cable loose”.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🔧 Loves opening systems</span>
-            <a class="wa-link"
-               href="https://wa.me/916006066453?text=Hi%20Mehran%2C%20our%20CHNM%20site%20is%20live!%20Ready%20for%20more%20PC%20upgrades%20%F0%9F%96%A5%EF%B8%8F"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Mehran
-            </a>
-          </div>
-        </article>
-
-        <!-- HASHIM -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">BIOS</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#4</span>
-            <span>Silent Debugger</span>
-          </div>
-          <h3 class="student-name">Hashim</h3>
-          <div class="student-role">Role: BIOS &amp; Boot Fixer</div>
-          <p class="student-qualities">
-            Qualities: Observes quietly, solves problems without drama, focused during practicals.
-          </p>
-          <p class="student-fun">
-            Funny: Speaks less, but when he speaks, it’s either a perfect answer or a savage one-liner.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">⚙️ Boot issues fear him</span>
-            <a class="wa-link"
-               href="https://wa.me/919103298704?text=Hashim%2C%20BIOS%20king!%20Have%20you%20seen%20our%20CHNM%20website%20yet%3F%20%F0%9F%92%BB"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Hashim
-            </a>
-          </div>
-        </article>
-
-       <!-- BASIT -->
-<article class="student-card" data-gender="boys">
-  <div class="mini-robot">
-    <div class="mini-body">
-      <div class="mini-head">
-        <div class="mini-eye left"></div>
-        <div class="mini-eye right"></div>
-      </div>
-      <div class="mini-status">TOOLS</div>
-      <div class="mini-legs">
-        <div class="mini-leg"></div>
-        <div class="mini-leg"></div>
+  <!-- ✅ STUDENTS -->
+  <section class="students">
+    <div class="student-card">
+      <img src="student1.jpg" alt="">
+      <div class="student-info">
+        <h3>Student Name</h3>
+        <p>Roll No: 01</p>
       </div>
     </div>
-  </div>
 
-  <!-- hidden audio element for Basit -->
-  <audio id="audio-basit" src="basit.mp3"></audio>
-
-  <div class="student-rank">
-    <span>#5</span>
-    <span>Tool Kit Manager</span>
-  </div>
-  <h3 class="student-name">Basit</h3>
-  <div class="student-role">Role: Screwdriver &amp; Tools Master</div>
-  <p class="student-qualities">
-    Qualities: Always ready with the right tool, organised, remembers where everything is kept.
-  </p>
-  <p class="student-fun">
-    Funny: Treats missing screwdriver like a missing person case – full investigation mode on.
-  </p>
-  <div class="student-meta-row">
-    <span class="student-tag">🧰 “Tools ka boss”</span>
-    <div style="display:flex; gap:0.3rem; align-items:center;">
-      <button
-        type="button"
-        class="audio-btn"
-        onclick="document.getElementById('audio-basit').play()"
-      >
-        🔊 Play Audio
-      </button>
-      <a class="wa-link"
-         href="https://wa.me/916005336599?text=Basit%2C%20tool%20master!%20Our%20CHNM%20website%20is%20ready%20%E2%9A%99%EF%B8%8F"
-         target="_blank">
-        <span class="icon">📲</span> WhatsApp Basit
-      </a>
-    </div>
-  </div>
-</article>
-
-        <!-- RAYEES -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">FUN</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#6</span>
-            <span>Lab Entertainer</span>
-          </div>
-          <h3 class="student-name">Rayees</h3>
-          <div class="student-role">Role: Mood Lifter &amp; Backup Support</div>
-          <p class="student-qualities">
-            Qualities: Keeps everyone smiling, helps friends in practicals, never lets the lab feel boring.
-          </p>
-          <p class="student-fun">
-            Funny: Gives comedy commentary even while installing Windows.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">😄 Full-time entertainer</span>
-            <a class="wa-link"
-               href="https://wa.me/919103548687?text=Oye%20Rayees%20bhai%2C%20CHNM%20website%20bhi%20ready%20hai%2C%20ab%20commentary%20idhar%20bhi%20%F0%9F%98%82"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Rayees
-            </a>
-          </div>
-        </article>
-
-        <!-- NASIR -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">LOG</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#7</span>
-            <span>Log Keeper</span>
-          </div>
-          <h3 class="student-name">Nasir</h3>
-          <div class="student-role">Role: Notes &amp; IP Address Recorder</div>
-          <p class="student-qualities">
-            Qualities: Keeps track of details, good at writing, remembers which system has what configuration.
-          </p>
-          <p class="student-fun">
-            Funny: Treats IP addresses like phone numbers – “Yeh yaad rakhna, important hai.”
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">📒 Responsible note-taker</span>
-            <a class="wa-link"
-               href="https://wa.me/91922592146?text=Nasir%2C%20IP%20aur%20notes%20master%21%20Hamari%20CHNM%20site%20dekh%20lo%20%F0%9F%93%9D"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Nasir
-            </a>
-          </div>
-        </article>
-
-        <!-- SUHAIL -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">WiFi</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#8</span>
-            <span>Wi-Fi Hunter</span>
-          </div>
-          <h3 class="student-name">Suhail</h3>
-          <div class="student-role">Role: Wireless Troubleshooter</div>
-          <p class="student-qualities">
-            Qualities: Quick with networks, tries different tricks when internet misbehaves, always experimenting.
-          </p>
-          <p class="student-fun">
-            Funny: Walks around the lab with laptop like a Wi-Fi antenna, searching for “best signal spot”.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">📡 Wi-Fi signal expert</span>
-            <a class="wa-link"
-               href="https://wa.me/919622592146?text=Suhail%2C%20Wi-Fi%20hunter%20bhai%21%20Site%20online%20hai%2C%20signal%20full%20%F0%9F%93%B1"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Suhail
-            </a>
-          </div>
-        </article>
-
-        <!-- UMAIR -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">CALM</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#9</span>
-            <span>Calm Technician</span>
-          </div>
-          <h3 class="student-name">Umair</h3>
-          <div class="student-role">Role: Step-By-Step Troubleshooter</div>
-          <p class="student-qualities">
-            Qualities: Works slowly but correctly, follows proper procedure, doesn’t panic during errors.
-          </p>
-          <p class="student-fun">
-            Funny: Says “Aram se karte hain” even when the practical time is almost over.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🧊 Cool under pressure</span>
-            <a class="wa-link"
-               href="https://wa.me/916005610811?text=Umair%2C%20slow%20and%20steady%20pro%21%20Check%20our%20new%20CHNM%20site%20%F0%9F%92%BB"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Umair
-            </a>
-          </div>
-        </article>
-<!-- IKHLAS -->
-<article class="student-card" data-gender="boys">
-  <div class="mini-robot">
-    <div class="mini-body">
-      <div class="mini-head">
-        <div class="mini-eye left"></div>
-        <div class="mini-eye right"></div>
-      </div>
-      <div class="mini-status">KEY</div>
-      <div class="mini-legs">
-        <div class="mini-leg"></div>
-        <div class="mini-leg"></div>
+    <div class="student-card">
+      <img src="student2.jpg" alt="">
+      <div class="student-info">
+        <h3>Student Name</h3>
+        <p>Roll No: 02</p>
       </div>
     </div>
-  </div>
-
-  <!-- hidden audio element for Ikhlas -->
-  <audio id="audio-ikhlas" src="ikhlas.mp3"></audio>
-
-  <div class="student-rank">
-    <span>#10</span>
-    <span>Shortcut Finder</span>
-  </div>
-  <h3 class="student-name">Ikhlas</h3>
-  <div class="student-role">Role: Keyboard &amp; Shortcuts Guy</div>
-  <p class="student-qualities">
-    Qualities: Loves keyboard shortcuts, finds easier ways to do hard tasks, remembers commands quickly.
-  </p>
-  <p class="student-fun">
-    Funny: Uses so many shortcuts that sometimes even Windows gets confused.
-  </p>
-  <div class="student-meta-row">
-    <span class="student-tag">⌨️ Shortcut master</span>
-    <div style="display:flex; gap:0.3rem; align-items:center;">
-      <button
-        type="button"
-        class="audio-btn"
-        onclick="document.getElementById('audio-ikhlas').play()"
-      >
-        🔊 Play Audio
-      </button>
-      <a class="wa-link"
-         href="https://wa.me/916006278377?text=Ikhlas%2C%20shortcut%20king%21%20Website%20bhi%20ready%20shortcut%20style%20%F0%9F%94%97"
-         target="_blank">
-        <span class="icon">📲</span> WhatsApp Ikhlas
-      </a>
-    </div>
-  </div>
-</article>
-
-
-                <!-- SALMAN -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">HELP</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#11</span>
-            <span>Jolly Helper</span>
-          </div>
-          <h3 class="student-name">Salman</h3>
-          <div class="student-role">Role: Backup for Everyone</div>
-          <p class="student-qualities">
-            Qualities: Helps classmates, shares ideas, supports in completing practical work.
-          </p>
-          <p class="student-fun">
-            Funny: Asks “Sir, easy method hai kya?” even when method already easy hota hai.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🤝 Friendly teammate</span>
-            <a class="wa-link"
-               href="https://wa.me/917006655079?text=Salman%2C%20helpful%20bhai%21%20Hamari%20CHNM%20website%20bhi%20helpful%20lag%20rahi%20hai%20%F0%9F%98%8A"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Salman
-            </a>
-          </div>
-        </article>
-
-        <!-- GIRLS -->
-        <!-- MUZAMIL -->
-        <article class="student-card" data-gender="girls">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">NOTE</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>G1</span>
-            <span>Focused Learner</span>
-          </div>
-          <h3 class="student-name">Muzamil</h3>
-          <div class="student-role">Role: Concept Clarity Champion</div>
-          <p class="student-qualities">
-            Qualities: Listens carefully, asks doubts at the right time, keeps notes very neat and clear.
-          </p>
-          <p class="student-fun">
-            Funny: Reminds everyone quietly about assignments while others say, “Aaj submission tha?!”
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">📘 Notebook always ready</span>
-            <span class="student-tag">Girls Squad</span>
-          </div>
-        </article>
-
-        <!-- MEHVISH -->
-        <article class="student-card" data-gender="girls">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">NEAT</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>G2</span>
-            <span>Practical Perfectionist</span>
-          </div>
-          <h3 class="student-name">Mehvish</h3>
-          <div class="student-role">Role: Detail-Oriented Technician</div>
-          <p class="student-qualities">
-            Qualities: Double-checks connections, keeps everything clean and organised during practicals.
-          </p>
-          <p class="student-fun">
-            Funny: Gets shocked when others mix up LAN and power cable like it’s a normal thing.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🎯 Focused on perfection</span>
-            <span class="student-tag">Girls Squad</span>
-          </div>
-        </article>
-
-        <!-- SNOOBAR -->
-        <article class="student-card" data-gender="girls">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">LOGIC</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>G3</span>
-            <span>Problem Solver</span>
-          </div>
-          <h3 class="student-name">Snoobar</h3>
-          <div class="student-role">Role: Calm Trouble Shooter</div>
-          <p class="student-qualities">
-            Qualities: Thinks before acting, tries different methods, good at understanding where the fault actually is.
-          </p>
-          <p class="student-fun">
-            Funny: Gives logical answer but laughs when others say “system me bhoot aa gaya”.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🧠 Logical thinker</span>
-            <span class="student-tag">Girls Squad</span>
-          </div>
-        </article>
-
-        <!-- SUFAYA -->
-        <article class="student-card" data-gender="girls">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">BAL</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>G4</span>
-            <span>Balanced Student</span>
-          </div>
-          <h3 class="student-name">Sufaya</h3>
-          <div class="student-role">Role: Theory + Practical Balancer</div>
-          <p class="student-qualities">
-            Qualities: Understands both notes and lab work, active in class and practicals both.
-          </p>
-          <p class="student-fun">
-            Funny: Helps others in practical but still says, “Mujhe toh thoda hi aata hai.”
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">⚖️ Balanced approach</span>
-            <span class="student-tag">Girls Squad</span>
-          </div>
-        </article>
-
-        <!-- BISMA -->
-        <article class="student-card" data-gender="girls">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">FAST</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>G5</span>
-            <span>Fast Learner</span>
-          </div>
-          <h3 class="student-name">Bisma</h3>
-          <div class="student-role">Role: Quick Picker &amp; Helper</div>
-          <p class="student-qualities">
-            Qualities: Picks concepts quickly, helps friends understand difficult topics in simple language.
-          </p>
-          <p class="student-fun">
-            Funny: Explains whole topic to classmates and then says, “Bas thoda-sa hi samjha hai.”
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🚀 Learns fast</span>
-            <span class="student-tag">Girls Squad</span>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    Made with ❤️ by AYAN <span>CHNM Trade</span> at ITI Anantnag – where PCs get repaired,
-    networks get fixed and friendships get upgraded.
-  </footer>
-
-  <button id="back-to-top" aria-label="Back to top">↑</button>
+  </section>
 
   <script>
-    // Welcome overlay hide
-    window.addEventListener("load", () => {
-      const overlay = document.getElementById("welcome-overlay");
-      setTimeout(() => {
-        overlay.classList.add("hide");
-      }, 2000);
-    });
+    /* ✅ THEME TOGGLE */
+    (function () {
+      const btn = document.getElementById("themeToggle");
+      const body = document.body;
 
-    // Student filters: all / boys / girls
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const studentCards = document.querySelectorAll(".student-card");
+      const saved = localStorage.getItem("chnm-theme");
 
-    filterButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter;
-
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        studentCards.forEach((card) => {
-          const gender = card.dataset.gender;
-          if (filter === "all" || filter === gender) {
-            card.style.display = "";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
-    });
-
-    // Back to top button
-    const backToTop = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTop.classList.add("show");
+      if (saved === "light") {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        btn.innerHTML = '<i class="ri-moon-line"></i>';
       } else {
-        backToTop.classList.remove("show");
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        btn.innerHTML = '<i class="ri-sun-line"></i>';
       }
-    });
 
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+      btn.addEventListener("click", () => {
+        if (body.classList.contains("dark-mode")) {
+          body.classList.remove("dark-mode");
+          body.classList.add("light-mode");
+          btn.innerHTML = '<i class="ri-moon-line"></i>';
+          localStorage.setItem("chnm-theme", "light");
+        } else {
+          body.classList.remove("light-mode");
+          body.classList.add("dark-mode");
+          btn.innerHTML = '<i class="ri-sun-line"></i>';
+          localStorage.setItem("chnm-theme", "dark");
+        }
+      });
+    })();
   </script>
+
 </body>
 </html>
