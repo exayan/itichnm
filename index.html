@@ -2,267 +2,357 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CHNM – ITI Anantnag | Hardware & Networking</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Remix Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" />
-
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
-    /* ✅ THEME VARIABLES */
-    :root {
-      --bg-main: #0d1117; /* default dark */
-      --bg-alt: #161b22;
-      --text-main: #e5e7eb;
-      --muted: #9ca3af;
-      --card-main: rgba(22, 27, 34, 0.9);
-      --border-main: rgba(148, 163, 228, 0.4);
-      --accent: #3aa9ff;
-      --accent2: #7f6bff;
-      --bg-glow: rgba(120, 150, 255, 0.18);
-      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.7);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-      --transition-fast: 0.25s ease;
-    }
-
-    /* ✅ LIGHT MODE */
-    body.light-mode {
-      --bg-main: #e8ecf3;
-      --bg-alt: #f4f6fb;
-      --text-main: #0f172a;
-      --muted: #6d7191;
-      --card-main: rgba(255, 255, 255, 0.9);
-      --border-main: rgba(20, 24, 50, 0.18);
-      --shadow-soft: 0 18px 50px rgba(10, 20, 60, 0.4);
-      --bg-glow: rgba(120, 150, 255, 0.15);
-    }
-
-    /* ✅ DARK MODE */
-    body.dark-mode {
-      --bg-main: #0d1117;
-      --bg-alt: #161b22;
-      --text-main: #e5e7eb;
-      --muted: #9ca3af;
-      --card-main: rgba(22, 27, 34, 0.9);
-      --border-main: rgba(148, 163, 228, 0.4);
-      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.7);
-      --bg-glow: rgba(120, 150, 255, 0.18);
-    }
-
-    /* ✅ GLOBAL BACKGROUND */
-    html, body {
-      scroll-behavior: smooth;
-      background: var(--bg-main);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      transition: background 0.4s ease, color 0.4s ease;
-    }
-
-    /* ✅ TRANSPARENT NEON GRAY OVERLAY */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 20%, var(--bg-glow), transparent 60%),
-        radial-gradient(circle at 80% 80%, var(--bg-glow), transparent 60%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* ✅ FLOATING THEME TOGGLE BUTTON */
-    .theme-toggle {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border-main);
-      background: var(--card-main);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 999;
-      color: var(--text-main);
-      box-shadow: var(--shadow-soft);
-      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-      border-color: var(--accent);
-    }
-
-    /* ✅ YOUR EXISTING CSS BELOW (unchanged) */
-    .top-bar {
-      width: 100%;
-      padding: 14px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 20;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 228, 0.2);
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 0.5px;
-    }
-
-    .menu-btn {
-      font-size: 1.8rem;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-
-    /* ✅ HERO SECTION */
-    .hero {
-      margin-top: 100px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      color: var(--muted);
-    }
-
-    /* ✅ STUDENT CARDS */
-    .students {
-      padding: 20px;
-    }
-
-    .student-card {
-      background: var(--card-main);
-      border: 1px solid var(--border-main);
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .student-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-    }
-
-    .student-card img {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--border-main);
-    }
-
-    .student-info h3 {
-      margin: 0;
-      font-size: 1.1rem;
-    }
-
-    .student-info p {
-      margin: 0;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-  </style>
+  <title>ITI Anantnag | CHNM Trade</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="script.js"></script>
 </head>
+<body>
+  <!-- Animated background shapes -->
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+  <div class="bg-shape bg-shape-3"></div>
 
-<body class="dark-mode">
+  <!-- Header / Navbar -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">ITI</span>
+        <div class="logo-text">
+          <span class="logo-title">Govt ITI Anantnag</span>
+          <span class="logo-subtitle">Computer Hardware & Network Maintenance</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About Trade</a>
+        <a href="#instructor" class="nav-link">Instructor</a>
+        <a href="#students" class="nav-link">Students</a>
+        <a href="#facilities" class="nav-link">Lab & Facilities</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-  <!-- ✅ Floating Theme Toggle -->
-  <button id="themeToggle" class="theme-toggle">
-    <i class="ri-sun-line"></i>
-  </button>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          CHNM Trade <span class="accent">Govt ITI Anantnag</span>
+        </h1>
+        <p class="hero-subtitle">
+          One-year **Computer Hardware & Network Maintenance (NSQF)** course, shaping students for real-world IT support,
+          troubleshooting, and network management in industry and government sectors.
+        </p>
+        <div class="hero-cta">
+          <button class="btn primary-btn" data-open-modal="trade-modal">
+            Trade Overview
+          </button>
+          <button class="btn outline-btn" data-scroll-target="#students">
+            Meet Our Students
+          </button>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="meta-label">Institute</span>
+            <span class="meta-value">Govt ITI Anantnag, Ashajipora</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Trade Code</span>
+            <span class="meta-value">0418 (CHNM)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">1 Year | NSQF Aligned</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="stats-card">
+          <h2>Key Highlights</h2>
+          <ul>
+            <li>Hands-on PC assembly & diagnostics</li>
+            <li>LAN setup, IP configuration & basic routing</li>
+            <li>OS installation & troubleshooting</li>
+            <li>Printer & peripheral maintenance</li>
+          </ul>
+        </div>
+        <div class="floating-badge">
+          <span>Active Trade</span>
+          <span>24 Seats</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ✅ TOP BAR -->
-  <div class="top-bar">
-    <div class="logo">CHNM – ITI Anantnag</div>
-    <i class="ri-menu-line menu-btn"></i>
+  <!-- About Trade Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>About CHNM Trade</h2>
+        <p>
+          Computer Hardware & Network Maintenance (CHNM) is a one-year trade under the Craftsmen Training Scheme,
+          affiliated for Govt ITI Anantnag with an intake of 24 trainees.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Course Structure</h3>
+          <ul class="feature-list">
+            <li><strong>Duration:</strong> 1 Year (2 semesters)</li>
+            <li><strong>Level:</strong> NSQF Aligned</li>
+            <li><strong>Intake:</strong> 24 trainees (single unit, one shift)</li>
+            <li><strong>Mode:</strong> Classroom + Lab-based practical training</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Eligibility & Outcomes</h3>
+          <ul class="feature-list">
+            <li><strong>Eligibility:</strong> Generally 10th pass from recognized board</li>
+            <li><strong>Focus:</strong> Hardware maintenance, basic networking, OS support</li>
+            <li><strong>Job roles:</strong> Computer hardware technician, IT support, field technician, lab assistant</li>
+            <li><strong>Higher studies:</strong> Advanced hardware, networking, diploma courses</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructor Section -->
+  <section id="instructor" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Instructor – Mr. Zahoor</h2>
+        <p>
+          The CHNM trade at Govt ITI Anantnag is guided by **Mr. Zahoor**, an instructor dedicated to practical,
+          industry-oriented training in computer hardware and networking.
+        </p>
+      </div>
+      <div class="instructor-layout">
+        <div class="instructor-card card">
+          <div class="instructor-avatar">
+            <!-- You can replace this with an actual photo if you want -->
+            <span class="avatar-initial">Z</span>
+          </div>
+          <div class="instructor-info">
+            <h3 class="instructor-name">Mr. Zahoor</h3>
+            <p class="instructor-role">Instructor – Computer Hardware & Network Maintenance</p>
+            <p class="instructor-summary">
+              With a strong background in computer hardware, operating systems, and local area networking,
+              Mr. Zahoor focuses on building clear concepts through live demonstrations, system assembly,
+              and real fault-based troubleshooting scenarios. His teaching emphasizes discipline, accurate
+              documentation, and preparing students for technical support roles in both government and private sectors.
+            </p>
+            <div class="tag-row">
+              <span class="tag">PC Assembly</span>
+              <span class="tag">Networking Basics</span>
+              <span class="tag">Troubleshooting</span>
+              <span class="tag">Lab-based Learning</span>
+            </div>
+            <button class="btn ghost-btn" data-open-modal="instructor-modal">
+              View teaching philosophy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Students Section -->
+  <section id="students" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Students</h2>
+        <p>
+          The CHNM trade welcomes both boys and girls, encouraging disciplined, hands-on learning and equal participation in lab activities.
+        </p>
+      </div>
+
+      <div class="students-layout">
+        <!-- Boys Section -->
+        <div class="students-group">
+          <h3>Boys</h3>
+          <p class="group-desc">
+            Below are some of our boys from the CHNM trade. Click on a card to see quick details in a popup.
+          </p>
+          <div class="student-grid">
+            <!-- Example boy student cards – add as many as you want -->
+            <!-- Just place images in same folder as index.html with filenames exactly as used below -->
+
+            <div class="student-card" data-name="Ayan" data-role="CHNM Trainee" data-batch="2024-25">
+              <div class="student-photo">
+                <img src="Ayan.jpg" alt="Ayan - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">Ayan</h4>
+                <p class="student-meta">Batch 2024–25</p>
+              </div>
+            </div>
+
+            <div class="student-card" data-name="Student2" data-role="CHNM Trainee" data-batch="2024-25">
+              <div class="student-photo">
+                <img src="Student2.jpg" alt="Student2 - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">Student2</h4>
+                <p class="student-meta">Batch 2024–25</p>
+              </div>
+            </div>
+
+            <div class="student-card" data-name="Student3" data-role="CHNM Trainee" data-batch="2024-25">
+              <div class="student-photo">
+                <img src="Student3.jpg" alt="Student3 - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">Student3</h4>
+                <p class="student-meta">Batch 2024–25</p>
+              </div>
+            </div>
+
+            <!-- Add more cards like above:
+                 <div class="student-card" data-name="Full Name" ...>
+                   <img src="Full Name.jpg">
+                 </div>
+            -->
+          </div>
+        </div>
+
+        <!-- Girls Section -->
+        <div class="students-group">
+          <h3>Girls</h3>
+          <p class="group-desc">
+            The trade encourages active participation of girls in all technical activities including PC hardware,
+            operating systems, and networking labs.
+          </p>
+          <ul class="girls-list">
+            <li><strong>Focus:</strong> Equal opportunity, safe lab environment, supportive learning</li>
+            <li><strong>Activities:</strong> Practical assignments, group work, documentation, viva</li>
+            <li><strong>Encouragement:</strong> Doubt-clearing sessions and personalized guidance</li>
+          </ul>
+          <p class="note">
+            Individual photos of girl students are not displayed publicly, respecting privacy and comfort.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab & Facilities Section -->
+  <section id="facilities" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Lab & Facilities</h2>
+        <p>
+          Govt ITI Anantnag provides dedicated laboratories and classrooms to support practical training for CHNM,
+          along with institute-level facilities for all trainees.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card facility-card">
+          <h3>Hardware Lab</h3>
+          <p>
+            Equipped with desktop systems for assembly and fault diagnosis, along with tools and components for
+            practical hardware maintenance.
+          </p>
+        </div>
+        <div class="card facility-card">
+          <h3>Networking Setup</h3>
+          <p>
+            LAN practice with switches, cabling, IP configuration, and basic network troubleshooting exercises.
+          </p>
+        </div>
+        <div class="card facility-card">
+          <h3>Institute Facilities</h3>
+          <p>
+            Govt ITI Anantnag hosts multiple trades, student support systems, and an environment focused on skill
+            development and discipline.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer Section -->
+  <footer id="contact" class="footer">
+    <div class="container footer-inner">
+      <div class="footer-block">
+        <h3>Institute Details</h3>
+        <p><strong>Name:</strong> Govt Industrial Training Institute Anantnag</p>
+        <p><strong>Address:</strong> Ashajipora, Anantnag, Jammu & Kashmir – 192101</p>
+        <p><strong>Phone:</strong> 01932-222581</p>
+        <p><strong>Email:</strong> itianantnag@gmail.com</p>
+      </div>
+      <div class="footer-block">
+        <h3>Trade Information</h3>
+        <p><strong>Trade:</strong> Computer Hardware & Network Maintenance (CHNM)</p>
+        <p><strong>Affiliation:</strong> Under NCVT / NSQF</p>
+        <p><strong>Duration:</strong> 1 Year, 24 seats (one unit, one shift)</p>
+      </div>
+      <div class="footer-block">
+        <h3>Quick Links</h3>
+        <a href="#hero">Home</a>
+        <a href="#about">About Trade</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#students">Students</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Govt ITI Anantnag – CHNM Trade</span>
+      <span class="footer-credit">Designed for educational purpose</span>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="trade-modal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <h3>Trade Overview – CHNM</h3>
+      <p>
+        The Computer Hardware & Network Maintenance trade trains students to assemble, maintain, and troubleshoot
+        personal computers and basic networks. Trainees learn to work with motherboards, storage devices, RAM,
+        power supplies, operating systems, and network components like switches and cabling.
+      </p>
+      <p>
+        On successful completion, students can work as hardware technicians, IT support staff, or pursue higher
+        studies in networking and system administration.
+      </p>
+    </div>
   </div>
 
-  <!-- ✅ HERO -->
-  <section class="hero">
-    <h1>Computer Hardware & Networking</h1>
-    <p>ITI Anantnag – Batch 2024</p>
-  </section>
-
-  <!-- ✅ STUDENTS -->
-  <section class="students">
-    <div class="student-card">
-      <img src="student1.jpg" alt="">
-      <div class="student-info">
-        <h3>Student Name</h3>
-        <p>Roll No: 01</p>
-      </div>
+  <div class="modal-overlay" id="instructor-modal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <h3>Teaching Philosophy – Mr. Zahoor</h3>
+      <p>
+        Mr. Zahoor believes that hardware and networking can only be mastered through consistent hands-on practice.
+        His approach combines clear theory notes, live demonstrations on real systems, and step-by-step troubleshooting.
+      </p>
+      <p>
+        Students are encouraged to document every practical, understand the root cause of faults, and develop
+        confidence in handling systems independently. Discipline, punctuality, and respect for lab equipment are
+        strongly emphasized.
+      </p>
     </div>
+  </div>
 
-    <div class="student-card">
-      <img src="student2.jpg" alt="">
-      <div class="student-info">
-        <h3>Student Name</h3>
-        <p>Roll No: 02</p>
-      </div>
+  <div class="modal-overlay" id="student-modal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <h3 id="student-modal-name">Student Name</h3>
+      <p><strong>Role:</strong> <span id="student-modal-role"></span></p>
+      <p><strong>Batch:</strong> <span id="student-modal-batch"></span></p>
+      <p>
+        This student is actively participating in the CHNM trade, focusing on practical system assembly,
+        operating system installation, and basic networking exercises.
+      </p>
     </div>
-  </section>
-
-  <script>
-    /* ✅ THEME TOGGLE */
-    (function () {
-      const btn = document.getElementById("themeToggle");
-      const body = document.body;
-
-      const saved = localStorage.getItem("chnm-theme");
-
-      if (saved === "light") {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
-        btn.innerHTML = '<i class="ri-moon-line"></i>';
-      } else {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
-        btn.innerHTML = '<i class="ri-sun-line"></i>';
-      }
-
-      btn.addEventListener("click", () => {
-        if (body.classList.contains("dark-mode")) {
-          body.classList.remove("dark-mode");
-          body.classList.add("light-mode");
-          btn.innerHTML = '<i class="ri-moon-line"></i>';
-          localStorage.setItem("chnm-theme", "light");
-        } else {
-          body.classList.remove("light-mode");
-          body.classList.add("dark-mode");
-          btn.innerHTML = '<i class="ri-sun-line"></i>';
-          localStorage.setItem("chnm-theme", "dark");
-        }
-      });
-    })();
-  </script>
-
+  </div>
 </body>
 </html>
