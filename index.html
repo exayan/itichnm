@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ITI Anantnag | CHNM Trade</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>ITI Anantnag | CHNM Trade 2025–2026</title>
+
+  <!-- Fonts: Poppins + Inter as fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script defer src="script.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- AOS (scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Animated background shapes -->
+  <!-- Background shapes for subtle depth -->
   <div class="bg-shape bg-shape-1"></div>
   <div class="bg-shape bg-shape-2"></div>
   <div class="bg-shape bg-shape-3"></div>
@@ -19,44 +27,57 @@
   <!-- Header / Navbar -->
   <header class="header">
     <div class="container header-inner">
-      <div class="logo">
-        <span class="logo-icon">ITI</span>
+      <div class="logo" data-aos="fade-right">
+        <div class="logo-image-wrap">
+          <img src="ITI.jpg" alt="ITI Logo" class="logo-image">
+        </div>
         <div class="logo-text">
           <span class="logo-title">Govt ITI Anantnag</span>
-          <span class="logo-subtitle">Computer Hardware & Network Maintenance</span>
+          <span class="logo-subtitle">Computer Hardware & Network Maintenance (CHNM)</span>
         </div>
       </div>
-      <nav class="nav">
+
+      <nav class="nav" id="navbar">
         <a href="#hero" class="nav-link">Home</a>
         <a href="#about" class="nav-link">About Trade</a>
+        <a href="#in-depth" class="nav-link">Trade Details</a>
+        <a href="#projects" class="nav-link">Projects</a>
         <a href="#instructor" class="nav-link">Instructor</a>
         <a href="#students" class="nav-link">Students</a>
-        <a href="#facilities" class="nav-link">Lab & Facilities</a>
+        <a href="#support" class="nav-link">Help</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+
+      <div class="header-actions">
+        <button class="mode-toggle" id="mode-toggle" aria-label="Toggle theme">
+          <span class="mode-icon mode-icon-sun">☀</span>
+          <span class="mode-icon mode-icon-moon">🌙</span>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section id="hero" class="hero">
     <div class="container hero-inner">
-      <div class="hero-content">
+      <div class="hero-content" data-aos="fade-up">
         <h1 class="hero-title">
-          CHNM Trade <span class="accent">Govt ITI Anantnag</span>
+          Computer Hardware & Network Maintenance
+          <span class="accent">Govt ITI Anantnag – Batch 2025–2026</span>
         </h1>
         <p class="hero-subtitle">
-          One-year **Computer Hardware & Network Maintenance (NSQF)** course, shaping students for real-world IT support,
-          troubleshooting, and network management in industry and government sectors.
+          A one-year NSQF-aligned trade focused on practical hardware, operating systems and basic networking skills,
+          preparing students for real support roles in labs, offices and service centers.
         </p>
         <div class="hero-cta">
           <button class="btn primary-btn" data-open-modal="trade-modal">
-            Trade Overview
+            Trade overview
           </button>
-          <button class="btn outline-btn" data-scroll-target="#students">
-            Meet Our Students
+          <button class="btn outline-btn" data-scroll-target="#projects">
+            See our projects
           </button>
         </div>
         <div class="hero-meta">
@@ -65,61 +86,146 @@
             <span class="meta-value">Govt ITI Anantnag, Ashajipora</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Trade Code</span>
+            <span class="meta-label">Trade code</span>
             <span class="meta-value">0418 (CHNM)</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Duration</span>
-            <span class="meta-value">1 Year | NSQF Aligned</span>
+            <span class="meta-label">Batch</span>
+            <span class="meta-value">2025–2026</span>
           </div>
         </div>
       </div>
-      <div class="hero-panel">
+
+      <div class="hero-panel" data-aos="fade-left">
         <div class="stats-card">
-          <h2>Key Highlights</h2>
+          <h2>Why CHNM?</h2>
           <ul>
             <li>Hands-on PC assembly & diagnostics</li>
-            <li>LAN setup, IP configuration & basic routing</li>
-            <li>OS installation & troubleshooting</li>
+            <li>LAN setup, IP configuration, basic routing</li>
+            <li>OS installation, dual-boot, fault fixing</li>
             <li>Printer & peripheral maintenance</li>
           </ul>
         </div>
         <div class="floating-badge">
-          <span>Active Trade</span>
-          <span>24 Seats</span>
+          <span>1 Year NSQF Trade</span>
+          <span>24 Seats · Active Unit</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Trade Section -->
+  <!-- About Trade (short) -->
   <section id="about" class="section">
     <div class="container">
-      <div class="section-header">
-        <h2>About CHNM Trade</h2>
+      <div class="section-header" data-aos="fade-up">
+        <h2>About CHNM trade</h2>
         <p>
-          Computer Hardware & Network Maintenance (CHNM) is a one-year trade under the Craftsmen Training Scheme,
-          affiliated for Govt ITI Anantnag with an intake of 24 trainees.
+          Computer Hardware & Network Maintenance (CHNM) at Govt ITI Anantnag builds your base in hardware, operating systems,
+          and small network setup through structured theory plus intensive lab work.
         </p>
       </div>
       <div class="grid grid-2">
-        <div class="card">
-          <h3>Course Structure</h3>
+        <div class="card" data-aos="fade-right">
+          <h3>Course structure</h3>
           <ul class="feature-list">
-            <li><strong>Duration:</strong> 1 Year (2 semesters)</li>
-            <li><strong>Level:</strong> NSQF Aligned</li>
-            <li><strong>Intake:</strong> 24 trainees (single unit, one shift)</li>
-            <li><strong>Mode:</strong> Classroom + Lab-based practical training</li>
+            <li><strong>Duration:</strong> 1 year (2 semesters)</li>
+            <li><strong>Pattern:</strong> Theory + lab-based practicals</li>
+            <li><strong>Intake:</strong> 24 trainees (one unit, one shift)</li>
+            <li><strong>Level:</strong> Aligned with NSQF</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Eligibility & Outcomes</h3>
+        <div class="card" data-aos="fade-left">
+          <h3>Outcomes</h3>
           <ul class="feature-list">
-            <li><strong>Eligibility:</strong> Generally 10th pass from recognized board</li>
-            <li><strong>Focus:</strong> Hardware maintenance, basic networking, OS support</li>
-            <li><strong>Job roles:</strong> Computer hardware technician, IT support, field technician, lab assistant</li>
-            <li><strong>Higher studies:</strong> Advanced hardware, networking, diploma courses</li>
+            <li><strong>Profile:</strong> Hardware support, lab assistant, field technician</li>
+            <li><strong>Skills:</strong> PC maintenance, LAN basics, OS support</li>
+            <li><strong>Scope:</strong> Further specialization in networking, system administration</li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- In-depth Trade Details -->
+  <section id="in-depth" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>Inside the CHNM trade</h2>
+        <p>
+          A deeper view of what students actually do in the lab and classroom during the one-year journey.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card" data-aos="fade-up" data-aos-delay="0">
+          <h3>Hardware foundation</h3>
+          <p class="card-text">
+            Trainees learn to identify PC components, assemble systems, handle BIOS/UEFI settings, manage storage devices,
+            and apply safe troubleshooting practices for common faults.
+          </p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+          <h3>Operating systems</h3>
+          <p class="card-text">
+            Installation and configuration of popular desktop operating systems, user and disk management, drivers,
+            basic security, and handling common OS errors in lab environments.
+          </p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+          <h3>Networking basics</h3>
+          <p class="card-text">
+            Fundamentals of LAN, IP addressing, configuring simple network setups, testing connectivity, and understanding
+            small office/lab network layouts.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-2 in-depth-extra">
+        <div class="card" data-aos="fade-right">
+          <h3>Documentation & discipline</h3>
+          <p class="card-text">
+            Students maintain proper practical notebooks, record faults and solutions, and follow lab discipline:
+            ESD precautions, tool care, and standard procedures before and after every practical.
+          </p>
+        </div>
+        <div class="card" data-aos="fade-left">
+          <h3>Soft skills & growth</h3>
+          <p class="card-text">
+            Through viva, demonstrations and teamwork, trainees learn how to present faults, explain solutions,
+            and prepare for real-world IT support communication.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>Our projects</h2>
+        <p>
+          Sample lab activities and mini-projects that CHNM students typically work on during the batch.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card project-card" data-aos="fade-up">
+          <h3>PC assembly & health check</h3>
+          <p class="card-text">
+            Complete desktop assembly from components, cable management, BIOS configuration, temperature and health checks,
+            plus stress testing to ensure stable operation.
+          </p>
+        </div>
+        <div class="card project-card" data-aos="fade-up" data-aos-delay="100">
+          <h3>Small office LAN setup</h3>
+          <p class="card-text">
+            Designing and setting up a small LAN with switches, assigning IPs, verifying connectivity and basic sharing
+            between systems in the lab.
+          </p>
+        </div>
+        <div class="card project-card" data-aos="fade-up" data-aos-delay="200">
+          <h3>Dual-boot & OS recovery</h3>
+          <p class="card-text">
+            Installing dual OS, managing partitions, repairing boot issues and backing up user data in case of system failure.
+          </p>
         </div>
       </div>
     </div>
@@ -128,27 +234,24 @@
   <!-- Instructor Section -->
   <section id="instructor" class="section section-alt">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-aos="fade-up">
         <h2>Instructor – Mr. Zahoor</h2>
         <p>
-          The CHNM trade at Govt ITI Anantnag is guided by **Mr. Zahoor**, an instructor dedicated to practical,
-          industry-oriented training in computer hardware and networking.
+          The CHNM trade at Govt ITI Anantnag is guided by Mr. Zahoor, who focuses on clear concepts and strong lab culture.
         </p>
       </div>
       <div class="instructor-layout">
-        <div class="instructor-card card">
+        <div class="instructor-card card" data-aos="fade-up">
           <div class="instructor-avatar">
-            <!-- You can replace this with an actual photo if you want -->
-            <span class="avatar-initial">Z</span>
+            <img src="zahoor.jpg" alt="Mr Zahoor - Instructor">
           </div>
           <div class="instructor-info">
             <h3 class="instructor-name">Mr. Zahoor</h3>
             <p class="instructor-role">Instructor – Computer Hardware & Network Maintenance</p>
             <p class="instructor-summary">
-              With a strong background in computer hardware, operating systems, and local area networking,
-              Mr. Zahoor focuses on building clear concepts through live demonstrations, system assembly,
-              and real fault-based troubleshooting scenarios. His teaching emphasizes discipline, accurate
-              documentation, and preparing students for technical support roles in both government and private sectors.
+              With experience in PC hardware, operating systems and local area networking, Mr. Zahoor runs sessions
+              centred on live demonstrations, real fault cases and step-by-step troubleshooting. He encourages trainees to
+              think logically, document every practical and respect lab discipline.
             </p>
             <div class="tag-row">
               <span class="tag">PC Assembly</span>
@@ -157,7 +260,7 @@
               <span class="tag">Lab-based Learning</span>
             </div>
             <button class="btn ghost-btn" data-open-modal="instructor-modal">
-              View teaching philosophy
+              Teaching philosophy
             </button>
           </div>
         </div>
@@ -168,139 +271,301 @@
   <!-- Students Section -->
   <section id="students" class="section">
     <div class="container">
-      <div class="section-header">
-        <h2>Our Students</h2>
+      <div class="section-header" data-aos="fade-up">
+        <h2>Our students – Batch 2025–2026</h2>
         <p>
-          The CHNM trade welcomes both boys and girls, encouraging disciplined, hands-on learning and equal participation in lab activities.
+          Each student plays a role in the lab and team activities. Click a card to see their role and a short summary.
         </p>
       </div>
 
       <div class="students-layout">
-        <!-- Boys Section -->
+        <!-- Boys -->
         <div class="students-group">
           <h3>Boys</h3>
           <p class="group-desc">
-            Below are some of our boys from the CHNM trade. Click on a card to see quick details in a popup.
+            Boys of CHNM are engaged in system assembly, OS installation and basic networking tasks.
           </p>
           <div class="student-grid">
-            <!-- Example boy student cards – add as many as you want -->
-            <!-- Just place images in same folder as index.html with filenames exactly as used below -->
 
-            <div class="student-card" data-name="Ayan" data-role="CHNM Trainee" data-batch="2024-25">
-              <div class="student-photo">
-                <img src="Ayan.jpg" alt="Ayan - CHNM Student" />
-              </div>
-              <div class="student-info">
-                <h4 class="student-name">Ayan</h4>
-                <p class="student-meta">Batch 2024–25</p>
+            <!-- AYAN – featured -->
+            <div class="student-card student-card-featured"
+              data-name="AYAN"
+              data-role="Lab coordinator & documentation lead"
+              data-batch="2025–2026"
+              data-summary="Helps in organizing practical work, maintaining clean documentation and experimenting with modern UI for technical notes and trade website.">
+              <div class="student-featured-glow"></div>
+              <div class="student-featured-inner">
+                <div class="student-photo">
+                  <img src="AYAN.jpg" alt="AYAN - CHNM Student" />
+                </div>
+                <div class="student-info">
+                  <div class="student-featured-header">
+                    <h4 class="student-name">AYAN</h4>
+                    <span class="student-star">★</span>
+                  </div>
+                  <p class="student-meta">Batch 2025–2026</p>
+                  <p class="student-highlight-text">
+                    Interested in hardware, networking and aesthetically documenting the trade with modern web layouts.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div class="student-card" data-name="Student2" data-role="CHNM Trainee" data-batch="2024-25">
+            <!-- Other boys -->
+            <div class="student-card"
+              data-name="BILAL"
+              data-role="Hardware troubleshooting support"
+              data-batch="2025–2026"
+              data-summary="Assists in identifying and solving common hardware issues like RAM, HDD and power-related faults.">
               <div class="student-photo">
-                <img src="Student2.jpg" alt="Student2 - CHNM Student" />
+                <img src="BILAL.jpg" alt="BILAL - CHNM Student" />
               </div>
               <div class="student-info">
-                <h4 class="student-name">Student2</h4>
-                <p class="student-meta">Batch 2024–25</p>
+                <h4 class="student-name">BILAL</h4>
+                <p class="student-meta">Batch 2025–2026</p>
               </div>
             </div>
 
-            <div class="student-card" data-name="Student3" data-role="CHNM Trainee" data-batch="2024-25">
+            <div class="student-card"
+              data-name="HASHIM"
+              data-role="Network cabling & testing"
+              data-batch="2025–2026"
+              data-summary="Focuses on proper LAN cabling, IP configuration and testing connectivity between systems.">
               <div class="student-photo">
-                <img src="Student3.jpg" alt="Student3 - CHNM Student" />
+                <img src="HASHIM.jpg" alt="HASHIM - CHNM Student" />
               </div>
               <div class="student-info">
-                <h4 class="student-name">Student3</h4>
-                <p class="student-meta">Batch 2024–25</p>
+                <h4 class="student-name">HASHIM</h4>
+                <p class="student-meta">Batch 2025–2026</p>
               </div>
             </div>
 
-            <!-- Add more cards like above:
-                 <div class="student-card" data-name="Full Name" ...>
-                   <img src="Full Name.jpg">
-                 </div>
-            -->
+            <div class="student-card"
+              data-name="BASIT"
+              data-role="OS installation & backup"
+              data-batch="2025–2026"
+              data-summary="Works on installing operating systems, managing partitions and basic backup before format.">
+              <div class="student-photo">
+                <img src="BASIT.jpg" alt="BASIT - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">BASIT</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="RAYEES"
+              data-role="Peripheral & printer handling"
+              data-batch="2025–2026"
+              data-summary="Helps in connecting printers, scanners and checking device drivers during practicals.">
+              <div class="student-photo">
+                <img src="RAYEES.jpg" alt="RAYEES - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">RAYEES</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="NASIR"
+              data-role="System assembly support"
+              data-batch="2025–2026"
+              data-summary="Participates in assembling PCs, connecting cables and testing first boot.">
+              <div class="student-photo">
+                <img src="NASIR.jpg" alt="NASIR - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">NASIR</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="MEHRAN"
+              data-role="Component identification"
+              data-batch="2025–2026"
+              data-summary="Supports in identifying components, ports and slots on motherboards and cards.">
+              <div class="student-photo">
+                <img src="MEHRAN.jpg" alt="MEHRAN - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">MEHRAN</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="SUHAIL"
+              data-role="Software utilities & tools"
+              data-batch="2025–2026"
+              data-summary="Handles basic utility software, antivirus, and system information tools used in lab.">
+              <div class="student-photo">
+                <img src="SUHAIL.jpg" alt="SUHAIL - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">SUHAIL</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="UMAIR"
+              data-role="Lab organization"
+              data-batch="2025–2026"
+              data-summary="Helps in keeping lab systems, cables and accessories arranged and ready for practicals.">
+              <div class="student-photo">
+                <img src="UMAIR.jpg" alt="UMAIR - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">UMAIR</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="IKHLAS"
+              data-role="Fault recording & notes"
+              data-batch="2025–2026"
+              data-summary="Supports in writing fault descriptions and solutions clearly in practical records.">
+              <div class="student-photo">
+                <img src="IKHLAS.jpg" alt="IKHLAS - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">IKHLAS</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
+            <div class="student-card"
+              data-name="SALMAN"
+              data-role="Demo assistance"
+              data-batch="2025–2026"
+              data-summary="Helps during live demonstrations, powering systems on/off and preparing setups.">
+              <div class="student-photo">
+                <img src="SALMAN.jpg" alt="SALMAN - CHNM Student" />
+              </div>
+              <div class="student-info">
+                <h4 class="student-name">SALMAN</h4>
+                <p class="student-meta">Batch 2025–2026</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Girls Section -->
-        <div class="students-group">
+        <!-- Girls -->
+        <div class="students-group" data-aos="fade-left">
           <h3>Girls</h3>
           <p class="group-desc">
-            The trade encourages active participation of girls in all technical activities including PC hardware,
-            operating systems, and networking labs.
+            Girls in CHNM participate equally in hardware, OS and networking activities in a safe and respectful environment.
           </p>
-          <ul class="girls-list">
-            <li><strong>Focus:</strong> Equal opportunity, safe lab environment, supportive learning</li>
-            <li><strong>Activities:</strong> Practical assignments, group work, documentation, viva</li>
-            <li><strong>Encouragement:</strong> Doubt-clearing sessions and personalized guidance</li>
-          </ul>
-          <p class="note">
-            Individual photos of girl students are not displayed publicly, respecting privacy and comfort.
-          </p>
+          <div class="girls-card card">
+            <h4>Girls – Batch 2025–2026</h4>
+            <ul class="girls-list">
+              <li><strong>MEHVISH:</strong> Focused on OS installation and basic user support.</li>
+              <li><strong>SNOOBAR:</strong> Interested in system maintenance and cleanliness of lab setups.</li>
+              <li><strong>MUZAMIL:</strong> Engaged in theory notes and helping others understand concepts.</li>
+              <li><strong>BISMA:</strong> Takes interest in documenting practical steps clearly.</li>
+              <li><strong>SUFAYA:</strong> Participates in network-related activities and cable management.</li>
+            </ul>
+            <p class="note">
+              Photos of girl students are not displayed publicly, respecting privacy and comfort.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Lab & Facilities Section -->
-  <section id="facilities" class="section section-alt">
+  <!-- How can we help you Section -->
+  <section id="support" class="section section-alt">
     <div class="container">
-      <div class="section-header">
-        <h2>Lab & Facilities</h2>
+      <div class="section-header" data-aos="fade-up">
+        <h2>How can we help you?</h2>
         <p>
-          Govt ITI Anantnag provides dedicated laboratories and classrooms to support practical training for CHNM,
-          along with institute-level facilities for all trainees.
+          If you are from any trade of Govt ITI Anantnag and facing a training, lab or coordination issue, describe it here
+          and then contact us by email.
         </p>
       </div>
-      <div class="grid grid-3">
-        <div class="card facility-card">
-          <h3>Hardware Lab</h3>
-          <p>
-            Equipped with desktop systems for assembly and fault diagnosis, along with tools and components for
-            practical hardware maintenance.
-          </p>
-        </div>
-        <div class="card facility-card">
-          <h3>Networking Setup</h3>
-          <p>
-            LAN practice with switches, cabling, IP configuration, and basic network troubleshooting exercises.
-          </p>
-        </div>
-        <div class="card facility-card">
-          <h3>Institute Facilities</h3>
-          <p>
-            Govt ITI Anantnag hosts multiple trades, student support systems, and an environment focused on skill
-            development and discipline.
-          </p>
+
+      <div class="help-layout">
+        <div class="card help-card" data-aos="fade-up">
+          <h3>Share your issue</h3>
+          <form class="help-form" id="help-form">
+            <div class="form-group">
+              <label for="trade-select">ITI trade</label>
+              <select id="trade-select" name="trade">
+                <option value="">Select a trade</option>
+                <option value="CHNM">CHNM – Computer Hardware & Network Maintenance</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Fitter">Fitter</option>
+                <option value="Mechanic Motor Vehicle">Mechanic Motor Vehicle</option>
+                <option value="COPA">COPA – Computer Operator & Programming Assistant</option>
+                <option value="Stenography">Stenography</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Other">Other trade</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="issue-type">What is your problem about?</label>
+              <select id="issue-type" name="issueType">
+                <option value="">Select an option</option>
+                <option value="labs">Lab / practical related</option>
+                <option value="theory">Theory / notes related</option>
+                <option value="equipment">Equipment or system issue</option>
+                <option value="schedule">Time-table / schedule</option>
+                <option value="result">Result / assessment</option>
+                <option value="other">Other concern</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="issue-detail">Explain your issue (short)</label>
+              <textarea id="issue-detail" name="issueDetail" rows="3" placeholder="Write a short description (no personal data here)..."></textarea>
+            </div>
+
+            <div class="form-group help-connect">
+              <div>
+                <p class="help-text">Copy your details and send them by email:</p>
+                <p class="help-email"><strong>Email:</strong> aesthetic@outlook.in</p>
+              </div>
+              <button type="button" class="btn primary-btn" id="copy-help">
+                Copy details
+              </button>
+            </div>
+            <p class="copy-status" id="copy-status"></p>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact / Footer Section -->
+  <!-- Contact / Footer -->
   <footer id="contact" class="footer">
     <div class="container footer-inner">
       <div class="footer-block">
-        <h3>Institute Details</h3>
+        <h3>Institute details</h3>
         <p><strong>Name:</strong> Govt Industrial Training Institute Anantnag</p>
         <p><strong>Address:</strong> Ashajipora, Anantnag, Jammu & Kashmir – 192101</p>
         <p><strong>Phone:</strong> 01932-222581</p>
         <p><strong>Email:</strong> itianantnag@gmail.com</p>
       </div>
       <div class="footer-block">
-        <h3>Trade Information</h3>
+        <h3>Trade information</h3>
         <p><strong>Trade:</strong> Computer Hardware & Network Maintenance (CHNM)</p>
-        <p><strong>Affiliation:</strong> Under NCVT / NSQF</p>
-        <p><strong>Duration:</strong> 1 Year, 24 seats (one unit, one shift)</p>
+        <p><strong>Batch:</strong> 2025–2026</p>
+        <p><strong>Duration:</strong> 1 year, 24 seats</p>
       </div>
       <div class="footer-block">
-        <h3>Quick Links</h3>
+        <h3>Quick links</h3>
         <a href="#hero">Home</a>
-        <a href="#about">About Trade</a>
-        <a href="#instructor">Instructor</a>
+        <a href="#about">About trade</a>
+        <a href="#projects">Projects</a>
         <a href="#students">Students</a>
+        <a href="#support">Help & support</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -313,15 +578,14 @@
   <div class="modal-overlay" id="trade-modal">
     <div class="modal">
       <button class="modal-close" data-close-modal>&times;</button>
-      <h3>Trade Overview – CHNM</h3>
+      <h3>Trade overview – CHNM</h3>
       <p>
-        The Computer Hardware & Network Maintenance trade trains students to assemble, maintain, and troubleshoot
-        personal computers and basic networks. Trainees learn to work with motherboards, storage devices, RAM,
-        power supplies, operating systems, and network components like switches and cabling.
+        The CHNM trade focuses on building practical skills in assembling, configuring and maintaining personal computers and
+        small networks. Trainees work on real systems under guidance, facing real faults instead of only theory examples.
       </p>
       <p>
-        On successful completion, students can work as hardware technicians, IT support staff, or pursue higher
-        studies in networking and system administration.
+        By the end of the year, students should be confident in installing operating systems, solving common hardware issues,
+        setting up small LANs and supporting basic IT needs in labs and offices.
       </p>
     </div>
   </div>
@@ -329,15 +593,14 @@
   <div class="modal-overlay" id="instructor-modal">
     <div class="modal">
       <button class="modal-close" data-close-modal>&times;</button>
-      <h3>Teaching Philosophy – Mr. Zahoor</h3>
+      <h3>Teaching philosophy – Mr. Zahoor</h3>
       <p>
-        Mr. Zahoor believes that hardware and networking can only be mastered through consistent hands-on practice.
-        His approach combines clear theory notes, live demonstrations on real systems, and step-by-step troubleshooting.
+        Mr. Zahoor believes that learning hardware and networking requires repeated practice, clear steps and understanding
+        the reason behind every action. His classes combine blackboard explanations with live demonstration on actual systems.
       </p>
       <p>
-        Students are encouraged to document every practical, understand the root cause of faults, and develop
-        confidence in handling systems independently. Discipline, punctuality, and respect for lab equipment are
-        strongly emphasized.
+        Students are expected to keep their practical records neat, follow safety in the lab and be honest about what they know
+        and do not know so that doubts can be cleared properly.
       </p>
     </div>
   </div>
@@ -345,14 +608,17 @@
   <div class="modal-overlay" id="student-modal">
     <div class="modal">
       <button class="modal-close" data-close-modal>&times;</button>
-      <h3 id="student-modal-name">Student Name</h3>
+      <h3 id="student-modal-name">Student name</h3>
       <p><strong>Role:</strong> <span id="student-modal-role"></span></p>
       <p><strong>Batch:</strong> <span id="student-modal-batch"></span></p>
-      <p>
-        This student is actively participating in the CHNM trade, focusing on practical system assembly,
-        operating system installation, and basic networking exercises.
+      <p id="student-modal-summary">
+        This trainee is part of the CHNM trade for batch 2025–2026 and is active in practical work.
       </p>
     </div>
   </div>
+
+  <!-- JS: AOS + main script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
