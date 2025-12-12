@@ -9,16 +9,20 @@ function setTheme(theme) {
   } catch (e) {}
 }
 
-(function initTheme() {
-  try {
-    const saved = localStorage.getItem("iti-theme");
-    if (saved === "light" || saved === "dark") {
-      setTheme(saved);
-    } else {
-      setTheme("dark");
-    }
-  } catch (e) {
-    setTheme("dark");
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    // Default to light mode instead of dark mode
+    setTheme('light');
+  }
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
   }
 })();
 
